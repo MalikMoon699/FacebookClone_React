@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { IconButton } from "@mui/material";
+import { IconButton, Modal } from "@mui/material";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 const Login = ({ setUser }) => {
+  const [showPop, setShowPop] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -14,6 +15,10 @@ const Login = ({ setUser }) => {
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
   };
+
+  const handleOpen = () => setShowPop(true);
+  const handleClose = () => setShowPop(false);
+
   const handleLogin = () => {
     setError("");
     const storedUsers = JSON.parse(localStorage.getItem("newUser"));
@@ -37,45 +42,61 @@ const Login = ({ setUser }) => {
       return;
     }
 
-    setUser(storedUser);
-    alert("Login successful!");
-    navigate("/home");
+    setUser(newUser);
+    handleOpen();
+
+    setTimeout(() => {
+      handleClose();
+      navigate("/");
+    }, 3000);
   };
 
   return (
-    <div className="accountMain">
-      <div className="accountPop">
-        <h2>Login</h2>
-        {error && <p style={{ color: "red", fontSize: "14px" }}>{error}</p>}
-        <div className="inputContainer">
-          <div className="accounInput">
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div className="accounInput">
-            <input
-              type={showPassword ? "text" : "password"}
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <IconButton onClick={togglePasswordVisibility}>
-              {showPassword ? <VisibilityOffIcon /> : <RemoveRedEyeIcon />}
-            </IconButton>
+    <>
+      <Modal open={showPop} onClose={handleClose}>
+        <div className="modalPop popheight popwidth">
+          <div className="modalHeading">
+            <h2>Signup successful!</h2>
           </div>
         </div>
-        <IconButton className="postSubmit" onClick={handleLogin}>
-          Login
-        </IconButton>
-        <IconButton className="newAccount" onClick={() => navigate("/signup")}>
-          SignUp
-        </IconButton>
+      </Modal>
+      <div className="accountMain">
+        <div className="accountPop">
+          <h2>Login</h2>
+          {error && <p style={{ color: "red", fontSize: "14px" }}>{error}</p>}
+          <div className="inputContainer">
+            <div className="accounInput">
+              <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="accounInput">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <IconButton onClick={togglePasswordVisibility}>
+                {showPassword ? <VisibilityOffIcon /> : <RemoveRedEyeIcon />}
+              </IconButton>
+            </div>
+          </div>
+          <IconButton className="postSubmit" onClick={handleLogin}>
+            Login
+          </IconButton>
+          <IconButton
+            className="newAccount"
+            onClick={() => navigate("/signup")}
+          >
+            SignUp
+          </IconButton>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

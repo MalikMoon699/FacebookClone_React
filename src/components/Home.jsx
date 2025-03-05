@@ -1,6 +1,5 @@
 import React from "react";
 import Center from "./Center";
-import Navbar from "./Navbar";
 import LeftSidebar from "./LeftSidebar";
 import RightSidebar from "./RightSidebar";
 

@@ -53,6 +53,9 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: sticky;
+  top: 0;
+  background-color: white;
   padding: 8px 12px;
   box-shadow: 0px 3px 12px #4c4c4cb8;
 }
@@ -356,6 +359,7 @@ footer {
 }
 .popheight {
   height: auto !important;
+  max-height: 70%;
 }
 .left-post {
   display: flex;
@@ -812,6 +816,7 @@ h4 {
   align-items: center;
   justify-content: center;
   word-break: break-all;
+  width: 110px;
 }
 
 .divStory {

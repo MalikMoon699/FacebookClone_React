@@ -89,10 +89,10 @@ const PostCreator = ({ addPost, setPosts }) => {
             <Picker
               data={data}
               theme="light"
-
               Style={{ width: "33vw", borderRadius: "0" }}
               onEmojiSelect={(d) => {
                 setSelected(d.native);
+                setContent((prevContent) => prevContent + d.native);
               }}
             />
           </div>
@@ -116,6 +116,7 @@ const PostCreator = ({ addPost, setPosts }) => {
               value={content}
               onChange={(e) => setContent(e.target.value)}
             />
+            {image && <img key={image} src={image} alt="Preview" />}
             <div className="center2">
               <div className="modalHeaderBottom">
                 <h5>Add to your post</h5>
@@ -132,9 +133,7 @@ const PostCreator = ({ addPost, setPosts }) => {
                     onChange={handleImageChange}
                     style={{ display: "none" }}
                   />
-                  <div style={{ display: "none" }}>
-                    {image && <img key={image} src={image} alt="Preview" />}
-                  </div>
+                  <div></div>
                 </div>
               </div>
             </div>
