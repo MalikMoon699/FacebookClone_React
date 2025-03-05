@@ -9,6 +9,7 @@ import FontDownloadIcon from "@mui/icons-material/FontDownload";
 const StoryCreator = ({ addStory, setStories }) => {
   const inputRef = useRef(null);
   const [open, setOpen] = useState(false);
+    const [imgSize, setImgSize] = useState(false);
   const [openImg, setOpenImg] = useState(false);
   const [openText, setOpenText] = useState(false);
   const [userName, setUserName] = useState("");
@@ -58,6 +59,12 @@ const StoryCreator = ({ addStory, setStories }) => {
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
+     if (!file) return;
+
+     if (file.size > 1024 * 1024) {
+       setImgSize(true);
+       return;
+     }
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -70,6 +77,19 @@ const StoryCreator = ({ addStory, setStories }) => {
 
   return (
     <>
+      <Modal open={imgSize} onClose={() => setImgSize(false)}>
+        <div className="modalPop popheight popwidth">
+          <div className="modalHeading">
+            Error
+            <IconButton onClick={() => setImgSize(false)}>
+              <CloseIcon />
+            </IconButton>
+          </div>
+          <div style={{ padding: "50px 10px" }}>
+            <h2>Image size is up to 1000KB. Please choose another image.</h2>
+          </div>
+        </div>
+      </Modal>
       <Modal open={openImg} onClose={handleCloseImg}>
         <div className="modalPop popheight popwidth">
           <div className="modalHeading">

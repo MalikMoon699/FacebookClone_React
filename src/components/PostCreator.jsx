@@ -12,6 +12,7 @@ import Picker from "@emoji-mart/react";
 const PostCreator = ({ addPost, setPosts }) => {
   const inputRef = useRef(null);
   const [open, setOpen] = useState(false);
+    const [imgSize, setImgSize] = useState(false);
   const [userName, setUserName] = useState("");
   const [image, setImage] = useState("");
   const [content, setContent] = useState("");
@@ -60,6 +61,12 @@ const PostCreator = ({ addPost, setPosts }) => {
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
+     if (!file) return;
+
+     if (file.size > 1024 * 1024) {
+       setImgSize(true);
+       return;
+     }
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -77,6 +84,19 @@ const PostCreator = ({ addPost, setPosts }) => {
 
   return (
     <>
+      <Modal open={imgSize} onClose={() => setImgSize(false)}>
+        <div className="modalPop popheight popwidth">
+          <div className="modalHeading">
+            Error
+            <IconButton onClick={() => setImgSize(false)}>
+              <CloseIcon />
+            </IconButton>
+          </div>
+          <div style={{ padding: "50px 10px" }}>
+            <h2>Image size is up to 1000KB. Please choose another image.</h2>
+          </div>
+        </div>
+      </Modal>
       <Modal open={showPicker} onClose={toggleEmoji}>
         <div className="modalPop popheight popwidth">
           <div className="modalHeading">

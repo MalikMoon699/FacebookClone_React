@@ -23,6 +23,7 @@ import Notification from "./Notification";
 const Navbar = () => {
   const inputRef = useRef(null);
   const [open, setOpen] = useState(false);
+  const [imgSize, setImgSize] = useState(false);
   const [search, setSearch] = useState(false);
   const [menu, setMenu] = useState(false);
   const [messanger, setMessanger] = useState(false);
@@ -55,6 +56,11 @@ const Navbar = () => {
     const file = event.target.files[0];
     if (!file) return;
 
+    if (file.size > 1024 * 1024) {
+      setImgSize(true);
+      return;
+    }
+
     const reader = new FileReader();
     reader.onload = () => {
       const newImage = reader.result;
@@ -63,7 +69,6 @@ const Navbar = () => {
     };
     reader.readAsDataURL(file);
   };
-
   const handleRemove = () => {
     localStorage.removeItem("profileImage");
     setImage("");
@@ -76,6 +81,19 @@ const Navbar = () => {
 
   return (
     <>
+      <Modal open={imgSize} onClose={() => setImgSize(false)}>
+        <div className="modalPop popheight popwidth">
+          <div className="modalHeading">
+            Error
+            <IconButton onClick={() => setImgSize(false)}>
+              <CloseIcon />
+            </IconButton>
+          </div>
+          <div style={{padding:"50px 10px"}}>
+            <h2>Image size is up to 1000KB. Please choose another image.</h2>
+          </div>
+        </div>
+      </Modal>
       <Modal open={notification} onClose={() => setNotification(false)}>
         <div className="modalPop popwidth">
           <div className="modalHeading">
