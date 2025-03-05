@@ -63,15 +63,13 @@ nav {
   display: none;
 }
 
-.centerIcon li{
-padding: 3px 30px;
-border-radius: 8px;
-
+.centerIcon li {
+  padding: 3px 30px;
+  border-radius: 8px;
 }
-.centerIcon li:hover{
-background-color: rgba(0, 0, 0, 0.173);
+.centerIcon li:hover {
+  background-color: rgba(0, 0, 0, 0.173);
 }
-
 
 .centerIcon-2 {
   gap: 22vw;
@@ -247,6 +245,11 @@ footer {
   display: flex;
   align-items: center;
   cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 8px;
+}
+.messageOptions:hover {
+  background-color: rgba(0, 0, 0, 0.142);
 }
 
 .messageOptions-1 .MuiSvgIcon-root {
