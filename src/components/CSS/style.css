@@ -249,15 +249,15 @@ footer {
   cursor: pointer;
 }
 
-.messageOptions-1 .css-1umw9bq-MuiSvgIcon-root {
+.messageOptions-1 .MuiSvgIcon-root {
   color: red;
 }
 
-.messageOptions-2 .css-1umw9bq-MuiSvgIcon-root {
+.messageOptions-2 .MuiSvgIcon-root {
   color: #01db01;
 }
 
-.messageOptions-3 .css-1umw9bq-MuiSvgIcon-root {
+.messageOptions-3 .MuiSvgIcon-root {
   color: #ffb800;
 }
 
