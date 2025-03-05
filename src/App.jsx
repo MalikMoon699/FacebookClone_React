@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Account from "./components/Account";
 import Main from "./components/Main";
+import Loader from "./components/Loader";
 
 const App = () => {
   const [user, setUser] = useState(null);

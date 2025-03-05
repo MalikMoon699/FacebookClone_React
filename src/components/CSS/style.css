@@ -966,6 +966,11 @@ h4 {
   }
 }
 
+.height-100vh{
+  height: 100vh;
+  justify-content: center;
+}
+
 .width {
   width: 80%;
   display: flex;
