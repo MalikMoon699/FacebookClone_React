@@ -19,37 +19,40 @@ const Login = ({ setUser }) => {
   const handleOpen = () => setShowPop(true);
   const handleClose = () => setShowPop(false);
 
-  const handleLogin = () => {
-    setError("");
-    const storedUsers = JSON.parse(localStorage.getItem("newUser"));
+const handleLogin = () => {
+  setError("");
+  const storedUsers = JSON.parse(localStorage.getItem("newUser"));
 
-    if (!storedUsers || storedUsers.length === 0) {
-      setError("No user found! Please sign up first.");
-      return;
-    }
+  if (!storedUsers || storedUsers.length === 0) {
+    setError("No user found! Please sign up first.");
+    return;
+  }
 
-    const storedUser = storedUsers.find(
-      (user) => user.email.trim() === email.trim()
-    );
+  const storedUser = storedUsers.find(
+    (user) => user.email.trim() === email.trim()
+  );
 
-    if (!storedUser) {
-      setError("Email does not match!!");
-      return;
-    }
+  if (!storedUser) {
+    setError("Email does not match!!");
+    return;
+  }
 
-    if (storedUser.password.trim() !== password.trim()) {
-      setError("Password does not match!!");
-      return;
-    }
+  if (storedUser.password.trim() !== password.trim()) {
+    setError("Password does not match!!");
+    return;
+  }
 
-    setUser(newUser);
-    handleOpen();
+  // Set the logged-in user correctly
+  setUser(storedUser);
 
-    setTimeout(() => {
-      handleClose();
-      navigate("/");
-    }, 3000);
-  };
+  handleOpen();
+
+  setTimeout(() => {
+    handleClose();
+    navigate("/");
+  }, 3000);
+};
+
 
   return (
     <>
