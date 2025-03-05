@@ -127,7 +127,7 @@ const Navbar = () => {
       </Modal>
 
       <Modal open={open} onClose={() => setOpen(false)}>
-        <div className="modalPop popwidth">
+        <div className="modalPop popheight popwidth">
           <div className="modalHeading border">
             Profile
             <IconButton onClick={() => setOpen(false)}>
@@ -168,7 +168,10 @@ const Navbar = () => {
             />
           </li>
           <li>
-            <span onClick={() => setSearch(true)} className="searchInput searchInput-1">
+            <span
+              onClick={() => setSearch(true)}
+              className="searchInput searchInput-1"
+            >
               <SearchIcon />
               <input type="text" placeholder="Search Facebook" />
             </span>

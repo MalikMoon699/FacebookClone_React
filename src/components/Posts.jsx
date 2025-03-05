@@ -111,10 +111,7 @@ const Posts = ({ posts, setPosts }) => {
       </Modal>
 
       <Modal open={openComment} onClose={toggleComment}>
-        <div
-          style={{ height: "auto"}}
-          className="modalPop popwidth"
-        >
+        <div className="modalPop popheight popwidth">
           <div className="modalHeading">
             Post Comments
             <IconButton onClick={toggleComment}>
@@ -166,7 +163,7 @@ const Posts = ({ posts, setPosts }) => {
       </Modal>
 
       <Modal open={open} onClose={toggleModal}>
-        <div style={{height:"auto"}} className="modalPop popwidth">
+        <div className="modalPop popheight popwidth">
           <div className="modalHeading">
             Share Post
             <IconButton onClick={toggleModal}>

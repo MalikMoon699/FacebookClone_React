@@ -99,7 +99,7 @@ const PostCreator = ({ addPost, setPosts }) => {
         </div>
       </Modal>
       <Modal open={open} onClose={handleClose}>
-        <div className="modalPop  popwidth">
+        <div className="modalPop popheight  popwidth">
           <div className="modalHeading">
             Create Post
             <IconButton onClick={handleClose}>

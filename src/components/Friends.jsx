@@ -12,7 +12,7 @@ const Friends = () => {
   return (
     <>
       <Modal open={friend} onClose={() => setFriend(false)}>
-        <div className="modalPop popwidth">
+        <div className="modalPop  popwidth">
           <div className="modalHeading">
             Friends
             <IconButton onClick={() => setFriend(false)}>

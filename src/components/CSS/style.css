@@ -355,7 +355,7 @@ footer {
   justify-content: space-between;
 }
 .popheight {
-  height: 55% !important;
+  height: auto !important;
 }
 .left-post {
   display: flex;
