@@ -24,12 +24,10 @@ const Signup = ({ setUser }) => {
       setError("All fields are required!");
       return;
     }
-
     if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
       setError("Enter a valid email.");
       return;
     }
-
     if (
       !/[a-zA-Z]/.test(password) ||
       !/\d/.test(password) ||
@@ -51,25 +49,24 @@ const Signup = ({ setUser }) => {
       return;
     }
 
-    const newUser = { userName, email, password };
-    const existingUsers = JSON.parse(localStorage.getItem("newUser")) || [];
-
-    if (existingUsers.some((user) => user.email === email)) {
-      setError("This email is already registered!");
-      return;
-    }
-
-    existingUsers.push(newUser);
-    localStorage.setItem("newUser", JSON.stringify(existingUsers));
-    localStorage.setItem("Nowuser", JSON.stringify(newUser));
-    setUser(newUser);
-
-    setLoading(true);
-
-    setTimeout(() => {
-      setLoading(false);
+    try {
+      setLoading(true);
+      const newUser = { userName, email, password };
+      const existingUsers = JSON.parse(localStorage.getItem("newUser")) || [];
+      if (existingUsers.some((user) => user.email === email)) {
+        setError("This email is already registered!");
+        return;
+      }
+      existingUsers.push(newUser);
+      localStorage.setItem("newUser", JSON.stringify(existingUsers));
+      localStorage.setItem("Nowuser", JSON.stringify(newUser));
+      setUser(newUser);
       navigate("/");
-    }, 3000);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

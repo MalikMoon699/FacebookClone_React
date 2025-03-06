@@ -97,6 +97,7 @@ const PostCreator = ({ addPost, setPosts }) => {
           </div>
         </div>
       </Modal>
+      
       <Modal open={showPicker} onClose={toggleEmoji}>
         <div className="modalPop popheight popwidth">
           <div className="modalHeading">

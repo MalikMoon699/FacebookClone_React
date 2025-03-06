@@ -1,48 +1,33 @@
 import React, { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import SidebarOptions from "./SidebarOptions.jsx";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Footer from "./Footer.jsx";
 import PersonIcon from "@mui/icons-material/Person";
 
 const Sidebar = () => {
-  const [userName, setUserName] = useState("");
+  const [userName, setUserName] = useState("Guest");
   const [image, setImage] = useState("");
   const [show, setShow] = useState(false);
 
   const Togglebar = () => {
     setShow((prev) => !prev);
   };
-  useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem("Nowuser"));
-    if (storedUser && storedUser.userName) {
-      setUserName(storedUser.userName);
-    }
 
+  useEffect(() => {
     const updateUserData = () => {
       const storedUser = JSON.parse(localStorage.getItem("Nowuser"));
-      if (storedUser && storedUser.userName) {
-        setUserName(storedUser.userName);
-      }
+      setUserName(storedUser?.userName || "Guest");
 
       const storedImage = localStorage.getItem("profileImage");
-      if (storedImage) {
-        setImage(storedImage);
-      }
+      setImage(storedImage || "");
     };
 
+    updateUserData();
 
-    const handleStorageChange = (event) => {
-      if (event.key === "profileImage" || event.key === "Nowuser") {
-        updateUserData();
-      }
-    };
-
-    const storedImage = localStorage.getItem("profileImage");
-    if (storedImage) {
-      setImage(storedImage);
-    }
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
+    window.addEventListener("storage", updateUserData);
+    return () => window.removeEventListener("storage", updateUserData);
   }, []);
 
   return (
@@ -50,12 +35,26 @@ const Sidebar = () => {
       <SidebarOptions
         src={image || null}
         Icon={!image ? PersonIcon : null}
-        title={userName || "Guest"}
+        title={userName}
       />
-      <SidebarOptions
-        src="https://img.icons8.com/?size=512w&id=mtro6UfgvCYA&format=png"
-        title="Friends"
-      />
+      <NavLink
+        to="/friends"
+        className={({ isActive }) => (isActive ? "active" : "")}
+      >
+        <SidebarOptions
+          src="https://img.icons8.com/?size=512w&id=mtro6UfgvCYA&format=png"
+          title="Friends"
+        />
+      </NavLink>
+      <NavLink
+        to="/group"
+        className={({ isActive }) => (isActive ? "active" : "")}
+      >
+        <SidebarOptions
+          src="https://img.icons8.com/?size=512w&id=qdiD1wZOvDsv&format=png"
+          title="Groups"
+        />
+      </NavLink>
       <SidebarOptions
         src="https://img.icons8.com/?size=512&id=uLWV5A9vXIPu&format=png"
         title="Welcome"
@@ -69,37 +68,37 @@ const Sidebar = () => {
         title="Saved"
       />
       <SidebarOptions
-        src="https://img.icons8.com/?size=512w&id=qdiD1wZOvDsv&format=png"
-        title="Groups"
-      />
-      <SidebarOptions
         src="https://img.icons8.com/?size=512w&id=OCts8o0LpHho&format=png"
         title="Videos"
       />
-      <div className={show ? "none" : "block"}>
-        <SidebarOptions
-          src="https://img.icons8.com/?size=512w&id=77121&format=png"
-          title="Marketplace"
-        />
-        <SidebarOptions
-          src="https://static.xx.fbcdn.net/rsrc.php/v4/yF/r/kD5Sv0isIPs.png"
-          title="Feeds"
-        />
-        <SidebarOptions
-          src="https://img.icons8.com/?size=512w&id=0KyPfkIkeia7&format=png"
-          title="Events"
-        />
-        <SidebarOptions
-          src="https://static.xx.fbcdn.net/rsrc.php/v4/yC/r/y5w6W9F6KEL.png"
-          title="Ads Manager"
-        />
+      {show && (
+        <div>
+          <SidebarOptions
+            src="https://img.icons8.com/?size=512w&id=77121&format=png"
+            title="Marketplace"
+          />
+          <SidebarOptions
+            src="https://static.xx.fbcdn.net/rsrc.php/v4/yF/r/kD5Sv0isIPs.png"
+            title="Feeds"
+          />
+          <SidebarOptions
+            src="https://img.icons8.com/?size=512w&id=0KyPfkIkeia7&format=png"
+            title="Events"
+          />
+          <SidebarOptions
+            src="https://static.xx.fbcdn.net/rsrc.php/v4/yC/r/y5w6W9F6KEL.png"
+            title="Ads Manager"
+          />
+        </div>
+      )}
+      <div className="siderow">
+        <button className="searchBtn flex btnNormal"  onClick={() => Togglebar()}>
+          <span>
+            {show ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+          </span>{" "}
+          {show ? "See Less" : "See More"}
+        </button>
       </div>
-      <SidebarOptions
-        onClick={Togglebar}
-        Icon={KeyboardArrowDownIcon}
-        title="See More"
-      />
-
       <Footer />
     </>
   );

@@ -2,8 +2,11 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  text-decoration: none;
 }
-
+p{
+  color: black;
+}
 h1 {
   font-size: 15px;
   font-weight: 100;
@@ -302,6 +305,13 @@ footer {
 .searchBtn .MuiSvgIcon-root {
   color: white;
 }
+.btnNormal,.btnNormal .MuiSvgIcon-root {
+  background-color: transparent;
+  color: black;
+}
+.btnNormal:hover {
+  background-color: transparent !important;
+}
 
 .searchBtn:hover {
   background-color: #0867ffd6;
@@ -319,6 +329,10 @@ footer {
 .buttonComment .MuiSvgIcon-root {
   height: 15px;
   padding: 0px;
+  transition: all 0.3s;
+}
+.buttonComment .MuiSvgIcon-root:hover{
+  transform: rotate(90deg);
 }
 .comments-section {
   height: 40vh;
