@@ -939,6 +939,9 @@ h4 {
 }
 
 @media only screen and (max-width: 768px) {
+  .accountPop{
+    width: auto;
+  }
   .comments-section {
     height: 100vh;
   }
