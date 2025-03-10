@@ -90,6 +90,7 @@ const StoryCreator = ({ addStory, setStories }) => {
           </div>
         </div>
       </Modal>
+      
       <Modal open={openImg} onClose={handleCloseImg}>
         <div className="modalPop popheight popwidth">
           <div className="modalHeading">
